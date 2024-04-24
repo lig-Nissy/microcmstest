@@ -2,25 +2,10 @@
 // INDEX PAGE COMPONENTS
 import { useRouter } from "next/router";
 
-// API
-import {
-    Blog,
-    Test
-  } from "@/api/types";
-
 // Components
-import BaseLayout from "../bases/Layout";
+import BaseLayout from "./BaseLayout";
 
-
-export const Pageindex=(
-    {
-        blog,
-        test,
-    }:{
-        blog:Blog;
-        test:Test;
-    }
-)=>{
+export const Pageindex=()=>{
     const router = useRouter()
     return (
         <>

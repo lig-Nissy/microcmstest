@@ -8,12 +8,32 @@ export type Blog = {
     }]
 };
 
-export type Test = {
-    contents:[{
-        title:string,
-        content:string,
-    }]
-};
+export interface Content {
+  fieldId: string;
+  content: string;
+}
+
+export interface Article {
+  title: string;
+  content: Content[];
+}
+
+export interface Test {
+  contents: Article[];
+}
+
+
+// export type Test = {
+//   contents:{
+//     title:string
+//     content:[
+//       {
+//         fieldId: "content"; content: string
+//       }
+//     ]
+//   }
+// }
+  // | { fieldId: "content"; content: string }
 
 export type Sushi ={
     contents:[{

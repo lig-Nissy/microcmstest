@@ -1,19 +1,19 @@
 import type { MicroCMSQueries } from "microcms-js-sdk";
 import { client } from "./client";
 
-export const gettest1 = async (
+export const getArticle = async (
     queries?: MicroCMSQueries,
 ) => {
-    return await client.get({ endpoint: "test1", queries });
+    return await client.get({ endpoint: "article", queries });
 };
 
-export const getblog= async (
+export const getBlog= async (
     queries?: MicroCMSQueries,
 ) => {
     return await client.get({ endpoint: "blog", queries });
 };
 
-export const getsushi= async (
+export const getSushi= async (
     queries?: MicroCMSQueries,
 ) => {
     return await client.get({ endpoint: "sushi", queries });

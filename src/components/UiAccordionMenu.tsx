@@ -12,7 +12,7 @@ import { useAccordion } from "@/utils/useAccordion";
 //Style
 import styles from "@/styles/components/accordion.module.scss"
 
-export const Accordion = (
+const Accordion = (
     {
         title,
         data,
@@ -72,3 +72,5 @@ export const Accordion = (
     </>
   );
 }
+
+export default Accordion;

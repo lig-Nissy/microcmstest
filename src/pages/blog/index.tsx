@@ -1,22 +1,29 @@
-import {getblog, gettest1, getsushi} from "@/api/microcms"
+
+// apis
+import {getBlog, getArticle, getSushi} from "@/api/microcms"
+
+//api types
 import {
   Blog,
   Test,
   Sushi
 } from "@/api/types";
 
-import { Listpage } from "@/components/templates/Listpage";
+//components
+import { Listpage } from "@/components/TemplatesListpage";
 
 // データをテンプレートに受け渡す部分の処理を記述する
 export const getStaticProps = async () => {
-  const blog = await getblog();
-  const test = await gettest1();
-  const sushi = await getsushi();
+  const blog = await getBlog();
+  const article = await getArticle({
+    limit: 100,
+  });
+  const sushi = await getSushi();
 
   return {
     props: {
       blog,
-      test,
+      article,
       sushi
     },
   };
@@ -25,18 +32,18 @@ export const getStaticProps = async () => {
 export default function Home(
   {
     blog,
-    test,
+    article,
     sushi
   }:{
     blog:Blog;
-    test:Test;
+    article:Test;
     sushi:Sushi
   }
 ) {
   return (
       <Listpage
         blog={blog}
-        test={test}
+        article={article}
         sushi={sushi}
       />
   );

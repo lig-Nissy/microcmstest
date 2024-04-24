@@ -10,7 +10,7 @@ import {
 } from "@/api/types";
 
 //components
-import { Listpage } from "@/components/TemplatesListpage";
+import { Listpage } from "@/components/TemplateListpage";
 
 // データをテンプレートに受け渡す部分の処理を記述する
 export const getStaticProps = async () => {

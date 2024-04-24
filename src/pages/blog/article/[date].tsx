@@ -1,5 +1,4 @@
 // ARTICL INDEX PAGE
-import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 
 // apis
@@ -12,7 +11,7 @@ import {
 } from "@/api/types";
 
 //components
-import { TemplatesArticle } from "@/components/TemplatesArticle";
+import { TemplatesArticle } from "@/components/TemplateArticle";
 
 //////////////////////////
 // 詳細ページのパスを生成

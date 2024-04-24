@@ -4,7 +4,7 @@
 //   Test
 // } from "@/api/types";
 
-import { Pageindex } from "@/components/TemplatesPageindex";
+import { Pageindex } from "@/components/TemplatePageindex";
 
 // データをテンプレートに受け渡す部分の処理を記述する
 // export const getStaticProps = async () => {

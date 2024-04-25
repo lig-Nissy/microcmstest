@@ -10,10 +10,12 @@ export const Pageindex=()=>{
     return (
         <>
             <BaseLayout>
-                <h1>テストサイト</h1>
-                <p onClick={()=>{
-                    router.push("/blog")
-                }}>ブログ</p>
+                <div className="h-[80vh]">
+                    <h1>テストサイト</h1>
+                    <p onClick={()=>{
+                        router.push("/blog")
+                    }}>ブログ</p>
+                </div>
             </BaseLayout>
         </>
     )

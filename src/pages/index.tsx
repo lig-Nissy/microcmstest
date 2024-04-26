@@ -1,27 +1,24 @@
 // import {getBlog, getArticle} from "@/api/microcms"
 // import {
 //   Blog,
-//   Test
+//   Article
 // } from "@/api/types";
 
-import { Pageindex } from "@/components/TemplatePageindex";
+import { Pageindex } from "@/components/TemplatePageIndex";
 
 // データをテンプレートに受け渡す部分の処理を記述する
 // export const getStaticProps = async () => {
-  // const blog = await getBlog();
-  // const article = await getArticle();
+// const blog = await getBlog();
+// const article = await getArticle();
 
-  // return {
-  //   props: {
-  //     blog,
-  //     article
-  //   },
-  // };
+// return {
+//   props: {
+//     blog,
+//     article
+//   },
+// };
 // };
 
 export default function Home() {
-
-  return (
-      <Pageindex/>
-  );
+  return <Pageindex />;
 }

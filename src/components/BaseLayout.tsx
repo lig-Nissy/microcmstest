@@ -3,10 +3,7 @@ import React from "react";
 import Script from "next/script";
 
 // API types
-import {
-  MetaDataType,
-  ContactType,
-} from "@/api/types";
+import { MetaDataType, ContactType } from "@/api/types";
 
 // Components
 import BaseHead from "@/components/BaseHead";
@@ -21,17 +18,16 @@ export const BaseLayout = ({
   // contact?: ContactType;
   // meta: MetaDataType;
 }) => {
-
   return (
     <>
       {/* <BaseHead meta={meta} /> */}
-      <BaseHeader/>
+      <BaseHeader />
       <main>
         {children}
         {/* {aboutSection && <AboutSection common={common} about={about} />} */}
         {/* {contact && <ContactSection contact={contact} />} */}
       </main>
-      <BaseFooter/>
+      <BaseFooter />
     </>
   );
 };

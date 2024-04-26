@@ -54,10 +54,7 @@ export const useAccordion = () => {
     const elementChildHeight = element.firstElementChild.clientHeight;
     // アコーディオンの子要素の高さをもとに、アコーディオンの開閉アニメーションを実行する
     if (isOpen) {
-      element.animate(
-        openingKeyframes(elementChildHeight),
-        option,
-      );
+      element.animate(openingKeyframes(elementChildHeight), option);
     } else {
       // 初回レンダリング時にアニメーションが実行されないように、アコーディオンが開かれている場合のみアニメーションを実行する
       if (elementHeight > 0) {

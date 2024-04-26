@@ -1,28 +1,14 @@
-// ARTICL INDEX PAGE
-import { useState } from "react"
-
 // API types
-import {
-    Sushi
-} from "@/api/types";
+import { Accodion } from "@/api/types";
 
 //Hooks
 import { useAccordion } from "@/utils/useAccordion";
 
 //Style
-import styles from "@/styles/components/accordion.module.scss"
+import styles from "@/styles/components/uiAccordion.module.scss";
 
-const Accordion = (
-    {
-        title,
-        data,
-    }:{
-        title:string
-        data:Sushi
-        length:number
-    }
-)=>{
-    //アコーディオンの開閉状態を管理する状態変数
+const Accordion = ({ title, data }: { title: string; data: Accodion }) => {
+  //アコーディオンの開閉状態を管理する状態変数
   const { isOpen, setIsOpen, accordionRef } = useAccordion();
 
   const toggleAccordion = () => {
@@ -51,26 +37,21 @@ const Accordion = (
             }}
           >
             <div className="flex">
-                {
-                    data.contents?.map((data)=>(
-                        <div key={data.id} className="w-1/3 py-8">
-                            <h3>{data.name}</h3>
-                            <figure className="max-w-full">
-                                <img
-                                    src={data.img.url}
-                                    className="w-full"
-                                />
-                            </figure>
-                            <p>{data.text}</p>
-                        </div>
-                    ))
-                }
+              {data.contents?.map((data: any) => (
+                <div key={data.id} className="w-1/3 py-8">
+                  <h3>{data.name}</h3>
+                  <figure className="max-w-full">
+                    <img src={data.img.url} className="w-full" />
+                  </figure>
+                  <p>{data.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
     </>
   );
-}
+};
 
 export default Accordion;

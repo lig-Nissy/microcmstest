@@ -37,7 +37,7 @@ export const BaseHead = ({ meta }: { meta: MetaDataType }) => {
       <meta name="description" content={description} />
 
       {/* OGP / Facebook */}
-       {/* <meta property="og:site_name" content={title} />
+      {/* <meta property="og:site_name" content={title} />
        <meta property="og:type" content={ogType} />
        <meta property="og:url" content={currentUrl} />
        <meta property="og:title" content={title} />

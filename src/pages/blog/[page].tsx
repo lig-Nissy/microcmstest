@@ -7,8 +7,7 @@ import { getBlog, getArticle } from "@/api/microcms";
 //api types
 import { Blog, Article } from "@/api/types";
 
-//components
-import { TemplatesArticle } from "@/components/TemplateArticle";
+import Listpage from "@/components/TemplateListPage";
 
 //////////////////////////
 // 詳細ページのパスを生成
@@ -16,8 +15,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const article = await getArticle({
     limit: 100,
   });
-  const paths = article.contents.map((data: any) => ({
-    params: { date: data.title },
+  const pageNumber = Math.ceil(article.contents.length / 5);
+  const pages: number[] = [];
+  for (let i = 2; i <= pageNumber; i++) {
+    pages.push(i);
+  }
+  const paths = pages.map((data: any) => ({
+    params: { page: data.toString() },
   }));
   return { paths, fallback: false };
 };
@@ -25,11 +29,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 // データをテンプレートに受け渡す部分の処理を記述する
 export const getStaticProps = async (context: GetStaticPropsContext) => {
-  const title = context.params!.date;
   const blog = await getBlog();
+  const pagenumber = context.params!.date;
   //ユニークな値にする
   const article = await getArticle({
-    filters: `title[equals]${title}`,
+    //   filters: `title[equals]${title}`,
     orders: "-publishedAt",
   });
 
@@ -41,12 +45,8 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   };
 };
 
-export default function Home({
-  blog,
-  article,
-}: {
-  blog: Blog;
-  article: Article;
-}) {
-  return <TemplatesArticle blog={blog} article={article} />;
-}
+const page = ({ blog, article }: { blog: Blog; article: Article }) => {
+  return <Listpage blog={blog} article={article} />;
+};
+
+export default page;

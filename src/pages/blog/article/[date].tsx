@@ -27,6 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const title = context.params!.date;
   const blog = await getBlog();
+
   //ユニークな値にする
   const article = await getArticle({
     filters: `title[equals]${title}`,

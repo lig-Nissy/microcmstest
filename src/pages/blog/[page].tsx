@@ -8,6 +8,7 @@ import { getBlog, getArticle } from "@/api/microcms";
 import { Blog, Article } from "@/api/types";
 
 import Listpage from "@/components/TemplateListPage";
+import { log } from "console";
 
 //////////////////////////
 // 詳細ページのパスを生成
@@ -30,10 +31,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 // データをテンプレートに受け渡す部分の処理を記述する
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const blog = await getBlog();
-  const pagenumber = context.params!.date;
+  const itemsPerPage = 5; //1ページあたりの表示数
+  //paseIntで文字列型を数値型に変換
+  const page = parseInt(context.params?.page as string, 10); // 現在のページ番号
+  const offset = (page - 1) * itemsPerPage; // 現在のページの最初の記事のインデックス
+
   //ユニークな値にする
   const article = await getArticle({
-    //   filters: `title[equals]${title}`,
+    offset: offset,
+    limit: itemsPerPage,
     orders: "-publishedAt",
   });
 
@@ -41,12 +47,21 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     props: {
       blog,
       article,
+      page,
     },
   };
 };
 
-const page = ({ blog, article }: { blog: Blog; article: Article }) => {
-  return <Listpage blog={blog} article={article} />;
+const page = ({
+  blog,
+  article,
+  page,
+}: {
+  blog: Blog;
+  article: Article;
+  page: number;
+}) => {
+  return <Listpage blog={blog} article={article} page={page} />;
 };
 
 export default page;

@@ -11,7 +11,15 @@ import styles from "@/styles/components/templateListpage.module.scss";
 import Sidebar from "@/components/BaseSidebar";
 import Pagenation from "@/components/UiPagenation";
 
-const Listpage = ({ blog, article }: { blog: Blog; article: Article }) => {
+const Listpage = ({
+  blog,
+  article,
+  page,
+}: {
+  blog: Blog;
+  article: Article;
+  page: number;
+}) => {
   const baselink = "/blog/article";
   return (
     <>
@@ -38,7 +46,7 @@ const Listpage = ({ blog, article }: { blog: Blog; article: Article }) => {
                 );
               })}
             </div>
-            <Pagenation article={article} />
+            <Pagenation article={article} page={page} />
           </div>
         </div>
       </div>

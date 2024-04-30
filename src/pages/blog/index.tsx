@@ -10,13 +10,21 @@ import Listpage from "@/components/TemplateListPage";
 // データをテンプレートに受け渡す部分の処理を記述する
 export const getStaticProps = async () => {
   const blog = await getBlog();
+  const itemsPerPage = 5;
+  const page = 1; // 1ページ目を表示
+  const offset = (page - 1) * itemsPerPage; // 現在のページの最初の記事のインデックス
+
+  //ユニークな値にする
   const article = await getArticle({
-    limit: 100,
+    offset: offset, //どこから
+    limit: itemsPerPage, //何件
+    orders: "-publishedAt", //降順
   });
   return {
     props: {
       blog,
       article,
+      page,
     },
   };
 };
@@ -24,9 +32,11 @@ export const getStaticProps = async () => {
 export default function Home({
   blog,
   article,
+  page,
 }: {
   blog: Blog;
   article: Article;
+  page: number;
 }) {
-  return <Listpage blog={blog} article={article} />;
+  return <Listpage blog={blog} article={article} page={page} />;
 }

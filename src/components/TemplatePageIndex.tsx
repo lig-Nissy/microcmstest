@@ -12,6 +12,7 @@ export const Pageindex = () => {
         <div className="h-[80vh]">
           <h1>テストサイト</h1>
           <p
+            className="cursor-pointer"
             onClick={() => {
               router.push("/blog");
             }}

@@ -7,10 +7,13 @@ import { Blog, Article } from "@/api/types";
 //components
 import Listpage from "@/components/TemplateListPage";
 
+//variables
+import * as Variables from "@/variables";
+
 // データをテンプレートに受け渡す部分の処理を記述する
 export const getStaticProps = async () => {
   const blog = await getBlog();
-  const itemsPerPage = 5;
+  const itemsPerPage = Variables.PAGES_PAR_VIEW;
   const page = 1; // 1ページ目を表示
   const offset = (page - 1) * itemsPerPage; // 現在のページの最初の記事のインデックス
 

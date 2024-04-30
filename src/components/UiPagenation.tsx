@@ -47,7 +47,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
     }
   }
   //規定の数よりページが多い場合
-  //前2 後ろ2 ずつ押せるように生成
+  //前2 後2 ずつ押せるように生成
   else if (showPagenation < pageNumber) {
     if (page == 1) {
       // 1,2,3, ... >
@@ -63,7 +63,10 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       }
       FirstLinkFlag = true;
       LastLinkFlag = true;
-    } else if (page >= showPagenation - 1 && page <= pageNumber - showPagenation + 3) {
+    } else if (
+      page >= showPagenation - 1 &&
+      page <= pageNumber - showPagenation + 3
+    ) {
       //<< < ... 3,4,5 ... > >>
       for (let i = 0; i < showPagenation; i++) {
         pages.push(i + page - 2);
@@ -87,7 +90,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
     }
   }
   const baseLink = "/blog";
-  const createPageUrl = (page: number) => (page === 1 ? `${baseLink}` : `${baseLink}/${page}/`);
+  const createPageUrl = (page: number) =>
+    page === 1 ? `${baseLink}` : `${baseLink}/${page}/`;
 
   //最初のページに戻るリンク
   const FirstPageLink = () => {
@@ -107,6 +111,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
     );
   };
 
+  ///リンクの生成
   const GeneratePageLinks = () => {
     return (
       <>
@@ -138,7 +143,9 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
           }}
         />
       </p> */}
-      <div className="flex justify-center items-center gap-2">{GeneratePageLinks()}</div>
+      <div className="flex justify-center items-center gap-2">
+        {GeneratePageLinks()}
+      </div>
     </div>
   );
 };

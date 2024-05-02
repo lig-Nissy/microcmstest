@@ -6,20 +6,25 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint:html": "markuplint \"**/*.html\"",
-    "lint:css": "stylelint **/*.{css,scss,sass}",
+    "lint:html": "markuplint 'src/**/*.{html,jsx,tsx}'",
+    "lint:style": "stylelint 'src/**/*.{css,scss}'",
+    "lint:check": "npm run lint:html && npm run lint:style && npm run lint:es",
     "lint:es": "next lint",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'"
   },
   "dependencies": {
+    "eslint-config-next": "^14.2.3",
     "microcms-js-sdk": "^3.1.0",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
-    "sass": "^1.74.1"
+    "sass": "^1.74.1",
+    "stylelint-config-recess-order": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.1.1",
+    "@markuplint/jsx-parser": "^4.6.1",
+    "@markuplint/react-spec": "^4.4.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -40,6 +45,7 @@
     "stylelint": "^16.4.0",
     "stylelint-config-recommended": "^14.0.0",
     "stylelint-config-recommended-scss": "^14.0.0",
+    "stylelint-prettier": "^4.0.2",
     "stylelint-scss": "^6.2.1",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",

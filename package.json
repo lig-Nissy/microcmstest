@@ -8,6 +8,7 @@
     "start": "next start",
     "lint:html": "markuplint 'src/**/*.{html,jsx,tsx}'",
     "lint:style": "stylelint 'src/**/*.{css,scss}'",
+    "lint:style-fix": "stylelint --fix 'src/**/*.{css,scss}'",
     "lint:check": "npm run lint:html && npm run lint:style && npm run lint:es",
     "lint:es": "next lint",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'"

@@ -2,11 +2,7 @@
 import React from "react";
 import Head from "next/head";
 
-// API types
-import { MetaDataType } from "@/api/types";
-
-export const BaseHead = ({ meta }: { meta: MetaDataType }) => {
-  const { description, title, currentUrl, noIndex } = meta;
+export const BaseHead = () => {
   return (
     <Head>
       <meta charSet="UTF-8" />
@@ -16,13 +12,16 @@ export const BaseHead = ({ meta }: { meta: MetaDataType }) => {
       {appleTouchIcon && (
         <link href={appleTouchIcon.url} rel="apple-touch-icon" />
       )} */}
-      {noIndex && <meta name="robots" content="noindex,nofollow" />}
-      <link rel="canonical" href={currentUrl} />
+      {/* {noIndex && <meta name="robots" content="noindex,nofollow" />}
+      <link rel="canonical" href={currentUrl} /> */}
 
       {/* Primary Meta Tags */}
       <title>にっしーの日報まとめ</title>
-      <meta name="title" content={title} />
-      <meta name="description" content={description} />
+      <meta name="title" content="日報まとめ" />
+      <meta
+        name="description"
+        content="株式会社LIG 新人エンジニアにっしーの日報をまとめたブログです。たまに日報以外のことも呟きます。"
+      />
 
       {/* OGP / Facebook */}
       {/* <meta property="og:site_name" content={title} />

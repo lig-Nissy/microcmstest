@@ -1,14 +1,14 @@
 //React hooks
-import { useState } from "react";
+import { useState } from 'react';
 
 // ARTICL INDEX PAGE
-import Link from "next/link";
+import Link from 'next/link';
 
 //api types
-import { Article } from "@/api/types";
+import { Article } from '@/api/types';
 
 //variables
-import * as Variables from "@/variables";
+import * as Variables from '@/variables';
 
 const Pagenation = ({ article, page }: { article: Article; page: number }) => {
   //1ページあたりに描画する記事の個数の制限
@@ -99,7 +99,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
   }
 
   //ぺージネーションのベースリンク
-  const baseLink = "/blog";
+  const baseLink = '/blog';
   const createPageUrl = (page: number) => (page === 1 ? `${baseLink}` : `${baseLink}/${page}/`);
 
   //最初のページに戻るリンク
@@ -141,7 +141,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
           <Link
             href={createPageUrl(data)}
             key={index}
-            className={`${currentlyPage == data ? "bg-blue-500 text-white" : ""}
+            className={`${currentlyPage == data ? 'bg-blue-500 text-white' : ''}
             flex justify-center items-center w-8 h-8 border border-black rounded-full`}
           >
             <p>{data}</p>
@@ -154,12 +154,14 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
 
   return (
     <div>
-      <h3 className="mt-4">固定値</h3>
+      <h2 className="mt-4">固定値</h2>
       <p className="mt-4 ml-4">
         記事数：
         <input
           type="number"
           value={totalCount}
+          name="totalCount"
+          aria-label="記事数を入力してください"
           className="ml-2 border border-black"
           onChange={(e) => {
             setTotalCount(Number(e.target.value));
@@ -171,6 +173,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
         <input
           type="number"
           value={currentlyPage}
+          name="currentlyPage"
+          aria-label="現在のページを入力してください"
           className="ml-2 border border-black"
           onChange={(e) => {
             setCurrentlyPage(Number(e.target.value));
@@ -183,6 +187,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
         <input
           type="number"
           value={itemsPerPage}
+          name="itemsPerPage"
+          aria-label="1ページあたりの記事の個数を入力してください"
           className="ml-2 border border-black"
           onChange={(e) => {
             setItemsPerpage(Number(e.target.value));

@@ -1,7 +1,8 @@
 // BASE LAYOUT COMPONENT
 import React from "react";
-import { BaseHeader } from "./BaseHeader";
-import { BaseFooter } from "./BaseFooter";
+import { BaseHead } from "@/components/BaseHead";
+import { BaseHeader } from "@/components/BaseHeader";
+import { BaseFooter } from "@/components/BaseFooter";
 
 export const BaseLayout = ({
   children,
@@ -13,7 +14,7 @@ export const BaseLayout = ({
 }) => {
   return (
     <>
-      {/* <BaseHead meta={meta} /> */}
+      <BaseHead />
       <BaseHeader />
       <main>
         {children}

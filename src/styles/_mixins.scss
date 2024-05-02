@@ -1,5 +1,5 @@
-@use "variables" as *;
-@use "functions" as *;
+@use 'variables' as *;
+@use 'functions' as *;
 
 // hover可能なデバイスのみに適用
 @mixin hover {

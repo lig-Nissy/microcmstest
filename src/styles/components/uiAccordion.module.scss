@@ -1,73 +1,73 @@
-@use "../variables" as *;
-@use "../functions" as *;
-@use "../mixins" as *;
+@use '../variables' as *;
+@use '../functions' as *;
+@use '../mixins' as *;
 
-.details{
-    margin:0 0 2.083rem;
-    border: 0.042rem solid $color-base-black-02 ;
-    border-radius: 0.417rem;
-    font-size: vw(18);
-    overflow: hidden;
-    @include sp() {
-        border-radius: 1.67rem;
-    }
+.details {
+  margin: 0 0 2.083rem;
+  overflow: hidden;
+  font-size: vw(18);
+  border: 0.042rem solid $color-base-black-02;
+  border-radius: 0.417rem;
+  @include sp() {
+    border-radius: 1.67rem;
+  }
 }
 
-.heading{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin: 0;
-    background: #9d9d9d;
-    cursor: pointer;
-    &::-webkit-details-marker {
-        display: none;
-    }
-    @include whitespace-pre-wrap;
-    @include not_sp {
-        padding: 0.75rem 2rem;
-    }
-    @include sp {
-        padding: 3rem;
-    }
+.heading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+  background: #9d9d9d;
+  &::-webkit-details-marker {
+    display: none;
+  }
+  @include whitespace-pre-wrap;
+  @include not_sp {
+    padding: 0.75rem 2rem;
+  }
+  @include sp {
+    padding: 3rem;
+  }
 }
 
 //エディタCSSのプロパティが優先されるため詳細度を上げる
-p.headingText{
-    margin: 0 ;
-    line-height: 1.5;
-    font-weight: 700;
+p.headingText {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.5;
+  @include sp {
+    width: 85%;
+  }
+  .heading:hover & {
+    opacity: 0.5;
+  }
+}
+
+.content {
+  height: 0;
+  overflow: hidden;
+  &[data-open='false'] {
+    @include not_sp {
+      padding: 0 2rem 0;
+    }
     @include sp {
-        width: 85%;
+      padding: 0 2.75rem 0;
     }
-    .heading:hover & {
-        opacity: 0.5;
-    }
+  }
+  //エディタCSSのプロパティが優先されるため詳細度を上げる
+  & p {
+    margin: 0;
+  }
+  & figure {
+    width: fit-content;
+    margin: 0 auto 2.083rem;
+  }
 }
 
-.content{
-    height: 0;
-    overflow: hidden;
-    &[data-open="false"]{
-        @include not_sp {
-            padding: 0 2rem 0;
-        }
-        @include sp {
-            padding: 0 2.75rem 0;
-        }
-    }
-    //エディタCSSのプロパティが優先されるため詳細度を上げる
-    & p{
-        margin: 0;
-    }
-    & figure{
-        width: fit-content;
-        margin: 0 auto 2.083rem;
-    }
-}
-
-.contentImg{
-    width: 100%;
+.contentImg {
+  width: 100%;
 }

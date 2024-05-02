@@ -19,7 +19,11 @@ const Accordion = ({ title, data }: { title: string; data: Accodion }) => {
     <>
       <div className={`${styles.root}`}>
         <div className={styles.details}>
-          <button onClick={() => toggleAccordion()} className={styles.heading} data-open={!isOpen}>
+          <button
+            onClick={() => toggleAccordion()}
+            className={styles.heading}
+            data-open={!isOpen}
+          >
             <p className={styles.headingText}>{title}</p>
           </button>
           <div
@@ -36,7 +40,13 @@ const Accordion = ({ title, data }: { title: string; data: Accodion }) => {
                 <div key={data.id} className="w-1/3 py-8">
                   <h2>{data.name}</h2>
                   <figure className="max-w-full">
-                    <img src={data.img.url} className="w-full" width={data.img.width} height={data.img.height} />
+                    <img
+                      src={data.img.url}
+                      className="w-full"
+                      width={data.img.width}
+                      height={data.img.height}
+                      alt=""
+                    />
                   </figure>
                   <p>{data.text}</p>
                 </div>

@@ -5,7 +5,7 @@ import { GetStaticPaths, GetStaticPropsContext } from "next";
 import { getBlog, getArticle } from "@/api/microcms";
 
 //api types
-import { Blog, Article } from "@/api/types";
+import { Blog, Article, ArticleTitle } from "@/api/types";
 
 //components
 import { TemplatesArticle } from "@/components/TemplateArticle";
@@ -16,7 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const article = await getArticle({
     limit: 100,
   });
-  const paths = article.contents.map((data: any) => ({
+  const paths = article.contents.map((data: ArticleTitle) => ({
     params: { date: data.title },
   }));
   return { paths, fallback: false };

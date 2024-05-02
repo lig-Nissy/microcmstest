@@ -6,23 +6,11 @@ import Head from "next/head";
 import { MetaDataType } from "@/api/types";
 
 export const BaseHead = ({ meta }: { meta: MetaDataType }) => {
-  const {
-    favicon,
-    appleTouchIcon,
-    description,
-    title,
-    currentUrl,
-    ogType,
-    ogImage,
-    noIndex,
-  } = meta;
+  const { description, title, currentUrl, noIndex } = meta;
   return (
     <Head>
       <meta charSet="UTF-8" />
-      <meta
-        content="width=device-width,height=device-height,maximum-scale=1.0"
-        name="viewport"
-      />
+      <meta content="width=device-width,height=device-height,maximum-scale=1.0" name="viewport" />
       <link href="/sitemap-index.xml" rel="sitemap" />
       {/* {favicon && <link href={favicon.url} rel="icon" />}
       {appleTouchIcon && (
@@ -32,7 +20,7 @@ export const BaseHead = ({ meta }: { meta: MetaDataType }) => {
       <link rel="canonical" href={currentUrl} />
 
       {/* Primary Meta Tags */}
-      <title>{title}</title>
+      <title>にっしーの日報まとめ</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
 

@@ -26,14 +26,14 @@ export type Article = {
 };
 
 export type Accodion = {
-  contents: [
-    {
-      id: string;
-      name: string;
-      img: ImageType;
-      text: string;
-    },
-  ];
+  contents: AccodionContents[];
+};
+
+export type AccodionContents = {
+  id: string;
+  name: string;
+  img: ImageType;
+  text: string;
 };
 
 export type ImageType = {

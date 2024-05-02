@@ -25,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   for (let i = 2; i <= pageNumber; i++) {
     pages.push(i);
   }
-  const paths = pages.map((data: any) => ({
+  const paths = pages.map((data: number) => ({
     params: { page: data.toString() },
   }));
   return { paths, fallback: false };

@@ -1,12 +1,5 @@
 // BASE LAYOUT COMPONENT
 import React from "react";
-import Script from "next/script";
-
-// API types
-import { MetaDataType, ContactType } from "@/api/types";
-
-// Components
-import BaseHead from "@/components/BaseHead";
 import { BaseHeader } from "./BaseHeader";
 import { BaseFooter } from "./BaseFooter";
 

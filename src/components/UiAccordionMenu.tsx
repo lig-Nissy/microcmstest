@@ -1,5 +1,5 @@
 // API types
-import { Accodion } from "@/api/types";
+import { Accodion, AccodionContents } from "@/api/types";
 
 //Hooks
 import { useAccordion } from "@/utils/useAccordion";
@@ -37,7 +37,7 @@ const Accordion = ({ title, data }: { title: string; data: Accodion }) => {
             }}
           >
             <div className="flex">
-              {data.contents?.map((data: any) => (
+              {data.contents?.map((data: AccodionContents) => (
                 <div key={data.id} className="w-1/3 py-8">
                   <h3>{data.name}</h3>
                   <figure className="max-w-full">

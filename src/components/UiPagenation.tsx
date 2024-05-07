@@ -74,14 +74,20 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       }
       FirstLinkFlag = true;
       LastLinkFlag = true;
-    } else if (currentlyPage >= showPagenation - 1 && currentlyPage <= pageNumber - showPagenation + 3) {
+    } else if (
+      currentlyPage >= showPagenation - 1 &&
+      currentlyPage <= pageNumber - showPagenation + 3
+    ) {
       //<< < ... 3,4,5 ... > >>
       for (let i = 0; i < showPagenation; i++) {
         pages.push(i + currentlyPage - 2);
       }
       FirstLinkFlag = true;
       LastLinkFlag = true;
-    } else if (currentlyPage >= pageNumber - showPagenation + 3 && currentlyPage < pageNumber) {
+    } else if (
+      currentlyPage >= pageNumber - showPagenation + 3 &&
+      currentlyPage < pageNumber
+    ) {
       // << < ... 8,9,10 > >>
       for (let i = pageNumber - showPagenation + 1; i <= pageNumber; i++) {
         pages.push(i);
@@ -100,7 +106,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
 
   //ぺージネーションのベースリンク
   const baseLink = '/blog';
-  const createPageUrl = (page: number) => (page === 1 ? `${baseLink}` : `${baseLink}/${page}/`);
+  const createPageUrl = (page: number) =>
+    page === 1 ? `${baseLink}` : `${baseLink}/${page}/`;
 
   //最初のページに戻るリンク
   const FirstPageLink = () => {
@@ -181,7 +188,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
           }}
         />
       </p>
-      <h3 className="mt-4">可変値</h3>
+      <h2 className="mt-4">可変値</h2>
       <p className="my-4 ml-4">
         1ページあたりの記事の個数：
         <input
@@ -195,7 +202,9 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
           }}
         />
       </p>
-      <div className="flex justify-center items-center gap-2">{GeneratePageLinks()}</div>
+      <div className="flex justify-center items-center gap-2">
+        {GeneratePageLinks()}
+      </div>
     </div>
   );
 };

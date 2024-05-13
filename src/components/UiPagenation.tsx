@@ -40,16 +40,16 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       }
       FirstLinkFlag = false;
       NextLinkFlag = true;
-      if (pageNumber == 1) {
-        BackLinkFlag = false;
-        LastLinkFlag = false;
-      } else {
-        BackLinkFlag = true;
-        LastLinkFlag = true;
-      }
+      // if (pageNumber == 1) {
+      //   BackLinkFlag = false;
+      //   LastLinkFlag = false;
+      // } else {
+      //   BackLinkFlag = true;
+      //   LastLinkFlag = true;
+      // }
     } //2ページ目の時
     else if (currentlyPage == 2) {
-      for (let i = 1; i <= pageNumber - 1; i++) {
+      for (let i = 1; i <= pageNumber; i++) {
         pages.push(i);
       }
       FirstLinkFlag = false;
@@ -87,7 +87,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       BackLinkFlag = false;
       NextLinkFlag = true;
       LastLinkFlag = true;
-    } // 2ページ目の時
+    }
+    // 2ページ目の時
     else if (currentlyPage == 2) {
       for (let i = 1; i <= showPagenation + 1; i++) {
         pages.push(i);
@@ -96,7 +97,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       BackLinkFlag = true;
       NextLinkFlag = true;
       LastLinkFlag = true;
-    } // 3ページ目の時
+    }
+    // 3ページ目の時
     else if (currentlyPage < showPagenation) {
       for (let i = 1; i <= showPagenation + 2; i++) {
         pages.push(i);
@@ -105,10 +107,11 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       BackLinkFlag = true;
       NextLinkFlag = true;
       LastLinkFlag = true;
-    } //4ページ目から最後のページの4ページ前まで
+    }
+    //4ページ目から最後のページの4ページ前まで
     else if (
       currentlyPage >= showPagenation &&
-      currentlyPage <= pageNumber - showPagenation
+      currentlyPage <= pageNumber - showPagenation + 1
     ) {
       for (let i = 0; i < showPagenation + 3; i++) {
         pages.push(i + currentlyPage - 3);
@@ -117,10 +120,11 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       BackLinkFlag = true;
       NextLinkFlag = true;
       LastLinkFlag = true;
-    } //最後のページの4ページ前から最後のページまで
+    }
+    //最後のページの4ページ前から最後のページの4ページ前まで
     else if (
-      currentlyPage >= pageNumber - showPagenation &&
-      currentlyPage < pageNumber
+      currentlyPage > pageNumber - showPagenation &&
+      currentlyPage < pageNumber - showPagenation
     ) {
       for (let i = pageNumber - showPagenation + 1; i <= pageNumber; i++) {
         pages.push(i);
@@ -129,7 +133,28 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       BackLinkFlag = true;
       NextLinkFlag = true;
       LastLinkFlag = true;
-    } //最後のページの時
+    }
+    //最後のページの2ページ前の時
+    else if (currentlyPage == pageNumber - showPagenation + 2) {
+      for (let i = pageNumber - showPagenation - 1; i <= pageNumber; i++) {
+        pages.push(i);
+      }
+      FirstLinkFlag = true;
+      BackLinkFlag = true;
+      NextLinkFlag = true;
+      LastLinkFlag = true;
+    }
+    //最後のページの1ページ前の時
+    else if (currentlyPage == pageNumber - showPagenation + 3) {
+      for (let i = pageNumber - showPagenation; i <= pageNumber; i++) {
+        pages.push(i);
+      }
+      FirstLinkFlag = true;
+      BackLinkFlag = true;
+      NextLinkFlag = true;
+      LastLinkFlag = true;
+    }
+    //最後のページの時
     else if (currentlyPage == pageNumber) {
       for (let i = currentlyPage - showPagenation + 1; i <= pageNumber; i++) {
         pages.push(i);
@@ -178,7 +203,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
   const NextLink = (link: number) => {
     return (
       <>
-        {totalCount - showPagenation >= currentlyPage && <span>...</span>}
+        {pageNumber - showPagenation >= currentlyPage && <span>...</span>}
         <Link
           href={createPageUrl(link)}
           className="flex justify-center items-center w-8 h-8 border border-black rounded-full"
@@ -268,6 +293,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
         <input
           type="number"
           value={itemsPerPage}
+          min={1}
           name="itemsPerPage"
           aria-label="1ページあたりの記事の個数を入力してください"
           className="ml-2 border border-black"

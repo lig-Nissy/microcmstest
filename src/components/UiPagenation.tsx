@@ -23,83 +23,120 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
   // const [pageNumber, setPageNumber] = useState(Math.ceil(totalCount / itemsPerPage));
 
   const [currentlyPage, setCurrentlyPage] = useState(page);
-  const showPagenation = 5; //ページネーションの表示数
+  const showPagenation = 4; //ページネーションの表示数
   const pages: number[] = []; //ページネーション生成用の配列
+
   let FirstLinkFlag: boolean = false; //FirstLink用のフラグ
+  let NextLinkFlag: boolean = false; //NextLink用のフラグ
+  let BackLinkFlag: boolean = false; //backLink用のフラグ
   let LastLinkFlag: boolean = false; //LastLink用のフラグ
 
   //規定の数よりページが少ない場合
   if (showPagenation >= pageNumber) {
+    //1ページ目の時
     if (currentlyPage == 1) {
-      // 1,2,3, ... >
       for (let i = 1; i <= pageNumber; i++) {
         pages.push(i);
       }
       FirstLinkFlag = false;
+      NextLinkFlag = true;
       if (pageNumber == 1) {
+        BackLinkFlag = false;
         LastLinkFlag = false;
       } else {
+        BackLinkFlag = true;
         LastLinkFlag = true;
       }
-    } else if (currentlyPage < pageNumber) {
-      // << < 1,2,3 > >>
-      for (let i = 1; i <= pageNumber; i++) {
+    } //2ページ目の時
+    else if (currentlyPage == 2) {
+      for (let i = 1; i <= pageNumber - 1; i++) {
         pages.push(i);
       }
-      FirstLinkFlag = true;
+      FirstLinkFlag = false;
+      BackLinkFlag = true;
+      NextLinkFlag = true;
       LastLinkFlag = true;
-    } else if (currentlyPage == pageNumber) {
-      // << < ... 9,10
+    } //3ページ目以降の時
+    else if (currentlyPage < pageNumber) {
       for (let i = 1; i <= pageNumber; i++) {
         pages.push(i);
       }
       FirstLinkFlag = true;
+      BackLinkFlag = true;
+      NextLinkFlag = true;
+      LastLinkFlag = true;
+    } //最後のページの時
+    else if (currentlyPage == pageNumber) {
+      for (let i = 1; i <= pageNumber; i++) {
+        pages.push(i);
+      }
+      FirstLinkFlag = true;
+      BackLinkFlag = true;
+      NextLinkFlag = false;
       LastLinkFlag = false;
     }
   }
   //規定の数よりページが多い場合
-  //前2 後2 ずつ押せるように生成
   else if (showPagenation < pageNumber) {
+    // 1ページ目の時
     if (currentlyPage == 1) {
-      // 1,2,3, ... >
       for (let i = 1; i <= showPagenation; i++) {
         pages.push(i);
       }
       FirstLinkFlag = false;
+      BackLinkFlag = false;
+      NextLinkFlag = true;
       LastLinkFlag = true;
-    } else if (currentlyPage < showPagenation - 1) {
-      // << < 1,2,3 > >>
-      for (let i = 1; i <= showPagenation; i++) {
+    } // 2ページ目の時
+    else if (currentlyPage == 2) {
+      for (let i = 1; i <= showPagenation + 1; i++) {
         pages.push(i);
       }
       FirstLinkFlag = true;
+      BackLinkFlag = true;
+      NextLinkFlag = true;
       LastLinkFlag = true;
-    } else if (
-      currentlyPage >= showPagenation - 1 &&
-      currentlyPage <= pageNumber - showPagenation + 3
-    ) {
-      //<< < ... 3,4,5 ... > >>
-      for (let i = 0; i < showPagenation; i++) {
-        pages.push(i + currentlyPage - 2);
+    } // 3ページ目の時
+    else if (currentlyPage < showPagenation) {
+      for (let i = 1; i <= showPagenation + 2; i++) {
+        pages.push(i);
       }
       FirstLinkFlag = true;
+      BackLinkFlag = true;
+      NextLinkFlag = true;
       LastLinkFlag = true;
-    } else if (
-      currentlyPage >= pageNumber - showPagenation + 3 &&
+    } //4ページ目から最後のページの4ページ前まで
+    else if (
+      currentlyPage >= showPagenation &&
+      currentlyPage <= pageNumber - showPagenation
+    ) {
+      for (let i = 0; i < showPagenation + 3; i++) {
+        pages.push(i + currentlyPage - 3);
+      }
+      FirstLinkFlag = true;
+      BackLinkFlag = true;
+      NextLinkFlag = true;
+      LastLinkFlag = true;
+    } //最後のページの4ページ前から最後のページまで
+    else if (
+      currentlyPage >= pageNumber - showPagenation &&
       currentlyPage < pageNumber
     ) {
-      // << < ... 8,9,10 > >>
       for (let i = pageNumber - showPagenation + 1; i <= pageNumber; i++) {
         pages.push(i);
       }
       FirstLinkFlag = true;
+      BackLinkFlag = true;
+      NextLinkFlag = true;
       LastLinkFlag = true;
-    } else if (currentlyPage == pageNumber) {
-      // << < ... 9,10
+    } //最後のページの時
+    else if (currentlyPage == pageNumber) {
       for (let i = currentlyPage - showPagenation + 1; i <= pageNumber; i++) {
         pages.push(i);
       }
       FirstLinkFlag = true;
+      BackLinkFlag = true;
+      NextLinkFlag = false;
       LastLinkFlag = false;
     }
   }
@@ -119,7 +156,35 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
         >
           <p>&lt;&lt;</p>
         </Link>
-        <span>...</span>
+      </>
+    );
+  };
+
+  const BackLink = (link: number) => {
+    return (
+      <>
+        <Link
+          href={createPageUrl(link)}
+          className="flex justify-center items-center w-8 h-8 border border-black rounded-full"
+        >
+          <p>&lt;</p>
+        </Link>
+        {showPagenation + 1 <= link + 1 && <span>...</span>}
+      </>
+    );
+  };
+
+  //次のページにいくリンク
+  const NextLink = (link: number) => {
+    return (
+      <>
+        {totalCount - showPagenation >= currentlyPage && <span>...</span>}
+        <Link
+          href={createPageUrl(link)}
+          className="flex justify-center items-center w-8 h-8 border border-black rounded-full"
+        >
+          <p>&gt;</p>
+        </Link>
       </>
     );
   };
@@ -128,7 +193,6 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
   const LastPageLink = () => {
     return (
       <>
-        <span>...</span>
         <Link
           href={createPageUrl(pageNumber)}
           className="flex justify-center items-center w-8 h-8 border border-black rounded-full"
@@ -144,16 +208,24 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
     return (
       <>
         {FirstLinkFlag && FirstPageLink()}
+        {BackLinkFlag && BackLink(currentlyPage - 1)}
         {pages.map((data, index) => (
           <Link
             href={createPageUrl(data)}
             key={index}
-            className={`${currentlyPage == data ? 'bg-blue-500 text-white' : ''}
-            flex justify-center items-center w-8 h-8 border border-black rounded-full`}
+            className={`${currentlyPage == data ? 'text-black' : 'border border-black rounded-full text-blue-700'}
+            flex justify-center items-center w-8 h-8`}
           >
-            <p>{data}</p>
+            {currentlyPage == data ? (
+              <p>
+                {data}/{pageNumber}
+              </p>
+            ) : (
+              <p>{data}</p>
+            )}
           </Link>
         ))}
+        {NextLinkFlag && NextLink(currentlyPage + 1)}
         {LastLinkFlag && LastPageLink()}
       </>
     );
@@ -180,6 +252,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
         <input
           type="number"
           value={currentlyPage}
+          max={pageNumber}
+          min={1}
           name="currentlyPage"
           aria-label="現在のページを入力してください"
           className="ml-2 border border-black"

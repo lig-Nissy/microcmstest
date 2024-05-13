@@ -1,5 +1,5 @@
 //React hooks
-import { useState } from 'react';
+// import { useState } from 'react';
 
 // ARTICL INDEX PAGE
 import Link from 'next/link';
@@ -12,17 +12,17 @@ import * as Variables from '@/variables';
 
 const Pagenation = ({ article, page }: { article: Article; page: number }) => {
   //1ページあたりに描画する記事の個数の制限
-  // const { totalCount } = article;
-  const [totalCount, setTotalCount] = useState(article.totalCount);
+  const { totalCount } = article;
+  // const [totalCount, setTotalCount] = useState(article.totalCount);
 
-  // const itemsPerPage = Variables.PAGES_PAR_VIEW; //1ページあたりの表示数
-  const [itemsPerPage, setItemsPerpage] = useState(Variables.PAGES_PAR_VIEW); //1ページあたりの表示数
+  const itemsPerPage = Variables.PAGES_PAR_VIEW; //1ページあたりの表示数
+  // const [itemsPerPage, setItemsPerpage] = useState(Variables.PAGES_PAR_VIEW); //1ページあたりの表示数
 
   const pageNumber = Math.ceil(totalCount / itemsPerPage);
-  // const currentlyPage = page; //現在のページ
+  const currentlyPage = page; //現在のページ
   // const [pageNumber, setPageNumber] = useState(Math.ceil(totalCount / itemsPerPage));
 
-  const [currentlyPage, setCurrentlyPage] = useState(page);
+  // const [currentlyPage, setCurrentlyPage] = useState(page);
   const showPagenation = 4; //ページネーションの表示数
   const pages: number[] = []; //ページネーション生成用の配列
 
@@ -258,8 +258,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
 
   return (
     <div>
-      <h2 className="mt-4">固定値</h2>
-      <p className="mt-4 ml-4">
+      {/* <h2 className="mt-4">固定値</h2> */}
+      {/* <p className="mt-4 ml-4">
         記事数：
         <input
           type="number"
@@ -271,8 +271,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
             setTotalCount(Number(e.target.value));
           }}
         />
-      </p>
-      <p className="mt-2 ml-4">
+      </p> */}
+      {/* <p className="mt-2 ml-4">
         現在のページ：
         <input
           type="number"
@@ -286,8 +286,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
             setCurrentlyPage(Number(e.target.value));
           }}
         />
-      </p>
-      <h2 className="mt-4">可変値</h2>
+      </p> */}
+      {/* <h2 className="mt-4">可変値</h2>
       <p className="my-4 ml-4">
         1ページあたりの記事の個数：
         <input
@@ -301,7 +301,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
             setItemsPerpage(Number(e.target.value));
           }}
         />
-      </p>
+      </p> */}
       <div className="flex justify-center items-center gap-2">
         {GeneratePageLinks()}
       </div>

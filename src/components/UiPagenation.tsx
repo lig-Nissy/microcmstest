@@ -1,6 +1,3 @@
-//React hooks
-// import { useState } from 'react';
-
 // ARTICL INDEX PAGE
 import Link from 'next/link';
 
@@ -15,10 +12,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
   const { totalCount } = article;
 
   const itemsPerPage = Variables.PAGES_PAR_VIEW; //1ページあたりの表示数
-
   const pageNumber = Math.ceil(totalCount / itemsPerPage);
   const currentlyPage = page; //現在のページ
-
   const showPagenation = 4; //ページネーションの表示数
   const pages: number[] = []; //ページネーション生成用の配列
 

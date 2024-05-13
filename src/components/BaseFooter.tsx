@@ -1,19 +1,18 @@
 // HEADER COMPONENT
-import React from "react";
-
-// Style
-// import styles from "@/styles/components/BaseFooter.module.scss";
+import React from 'react';
 
 export const BaseFooter = () => {
   return (
-    <footer>
+    <footer className="bg-slate-400">
       <div>
         <ul>
           <li>Top</li>
           <li>Blog</li>
         </ul>
       </div>
-      <small>&copy;コピーライト</small>
+      <div className="w-full text-center">
+        <small>&copy;2024 YuyaNishizawa</small>
+      </div>
     </footer>
   );
 };

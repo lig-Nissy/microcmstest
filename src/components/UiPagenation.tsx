@@ -10,13 +10,23 @@ import { Article } from '@/api/types';
 //variables
 import * as Variables from '@/variables';
 
-const Pagenation = ({ article, page }: { article: Article; page: number }) => {
+const Pagenation = ({
+  article,
+  page,
+}: {
+  article: Article;
+  page: number;
+}) => {
   //1ページあたりに描画する記事の個数の制限
   // const { totalCount } = article;
-  const [totalCount, setTotalCount] = useState(article.totalCount);
+  const [totalCount, setTotalCount] = useState(
+    article.totalCount,
+  );
 
   // const itemsPerPage = Variables.PAGES_PAR_VIEW; //1ページあたりの表示数
-  const [itemsPerPage, setItemsPerpage] = useState(Variables.PAGES_PAR_VIEW); //1ページあたりの表示数
+  const [itemsPerPage, setItemsPerpage] = useState(
+    Variables.PAGES_PAR_VIEW,
+  ); //1ページあたりの表示数
 
   const pageNumber = Math.ceil(totalCount / itemsPerPage);
   // const currentlyPage = page; //現在のページ
@@ -39,38 +49,42 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
         pages.push(i);
       }
       FirstLinkFlag = false;
-      NextLinkFlag = true;
-      // if (pageNumber == 1) {
-      //   BackLinkFlag = false;
-      //   LastLinkFlag = false;
-      // } else {
-      //   BackLinkFlag = true;
-      //   LastLinkFlag = true;
-      // }
+      BackLinkFlag = false;
+      LastLinkFlag = false;
+      if (pageNumber == 1) {
+        NextLinkFlag = false;
+      } else {
+        NextLinkFlag = true;
+      }
     } //2ページ目の時
     else if (currentlyPage == 2) {
       for (let i = 1; i <= pageNumber; i++) {
         pages.push(i);
       }
-      FirstLinkFlag = false;
-      BackLinkFlag = true;
-      NextLinkFlag = true;
-      LastLinkFlag = true;
+      if (pageNumber == 2) {
+        FirstLinkFlag = false;
+        BackLinkFlag = true;
+        NextLinkFlag = false;
+        LastLinkFlag = false;
+      } else {
+        FirstLinkFlag = false;
+        BackLinkFlag = true;
+        NextLinkFlag = true;
+        LastLinkFlag = false;
+      }
     } //3ページ目以降の時
     else if (currentlyPage < pageNumber) {
       for (let i = 1; i <= pageNumber; i++) {
         pages.push(i);
       }
-      FirstLinkFlag = true;
       BackLinkFlag = true;
       NextLinkFlag = true;
-      LastLinkFlag = true;
     } //最後のページの時
     else if (currentlyPage == pageNumber) {
       for (let i = 1; i <= pageNumber; i++) {
         pages.push(i);
       }
-      FirstLinkFlag = true;
+      FirstLinkFlag = false;
       BackLinkFlag = true;
       NextLinkFlag = false;
       LastLinkFlag = false;
@@ -100,8 +114,14 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
     }
     // 3ページ目の時
     else if (currentlyPage < showPagenation) {
-      for (let i = 1; i <= showPagenation + 2; i++) {
-        pages.push(i);
+      if (pageNumber <= showPagenation + 2) {
+        for (let i = 1; i <= pageNumber; i++) {
+          pages.push(i);
+        }
+      } else {
+        for (let i = 1; i <= showPagenation + 2; i++) {
+          pages.push(i);
+        }
       }
       FirstLinkFlag = true;
       BackLinkFlag = true;
@@ -126,7 +146,11 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       currentlyPage > pageNumber - showPagenation &&
       currentlyPage < pageNumber - showPagenation
     ) {
-      for (let i = pageNumber - showPagenation + 1; i <= pageNumber; i++) {
+      for (
+        let i = pageNumber - showPagenation + 1;
+        i <= pageNumber;
+        i++
+      ) {
         pages.push(i);
       }
       FirstLinkFlag = true;
@@ -135,8 +159,15 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       LastLinkFlag = true;
     }
     //最後のページの2ページ前の時
-    else if (currentlyPage == pageNumber - showPagenation + 2) {
-      for (let i = pageNumber - showPagenation - 1; i <= pageNumber; i++) {
+    else if (
+      currentlyPage ==
+      pageNumber - showPagenation + 2
+    ) {
+      for (
+        let i = pageNumber - showPagenation - 1;
+        i <= pageNumber;
+        i++
+      ) {
         pages.push(i);
       }
       FirstLinkFlag = true;
@@ -145,8 +176,15 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       LastLinkFlag = true;
     }
     //最後のページの1ページ前の時
-    else if (currentlyPage == pageNumber - showPagenation + 3) {
-      for (let i = pageNumber - showPagenation; i <= pageNumber; i++) {
+    else if (
+      currentlyPage ==
+      pageNumber - showPagenation + 3
+    ) {
+      for (
+        let i = pageNumber - showPagenation;
+        i <= pageNumber;
+        i++
+      ) {
         pages.push(i);
       }
       FirstLinkFlag = true;
@@ -156,7 +194,11 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
     }
     //最後のページの時
     else if (currentlyPage == pageNumber) {
-      for (let i = currentlyPage - showPagenation + 1; i <= pageNumber; i++) {
+      for (
+        let i = currentlyPage - showPagenation + 1;
+        i <= pageNumber;
+        i++
+      ) {
         pages.push(i);
       }
       FirstLinkFlag = true;
@@ -177,7 +219,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       <>
         <Link
           href={createPageUrl(1)}
-          className="flex justify-center items-center w-8 h-8 border border-black rounded-full"
+          className="flex size-8 items-center justify-center rounded-full border border-black"
         >
           <p>&lt;&lt;</p>
         </Link>
@@ -190,7 +232,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       <>
         <Link
           href={createPageUrl(link)}
-          className="flex justify-center items-center w-8 h-8 border border-black rounded-full"
+          className="flex size-8 items-center justify-center rounded-full border border-black"
         >
           <p>&lt;</p>
         </Link>
@@ -203,10 +245,12 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
   const NextLink = (link: number) => {
     return (
       <>
-        {pageNumber - showPagenation >= currentlyPage && <span>...</span>}
+        {pageNumber - showPagenation >= currentlyPage && (
+          <span>...</span>
+        )}
         <Link
           href={createPageUrl(link)}
-          className="flex justify-center items-center w-8 h-8 border border-black rounded-full"
+          className="flex size-8 items-center justify-center rounded-full border border-black"
         >
           <p>&gt;</p>
         </Link>
@@ -220,7 +264,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
       <>
         <Link
           href={createPageUrl(pageNumber)}
-          className="flex justify-center items-center w-8 h-8 border border-black rounded-full"
+          className="flex size-8 items-center justify-center rounded-full border border-black"
         >
           <p>&gt;&gt;</p>
         </Link>
@@ -238,8 +282,8 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
           <Link
             href={createPageUrl(data)}
             key={index}
-            className={`${currentlyPage == data ? 'text-black' : 'border border-black rounded-full text-blue-700'}
-            flex justify-center items-center w-8 h-8`}
+            className={`${currentlyPage == data ? 'text-black' : 'rounded-full border border-black text-blue-700'}
+            flex size-8 items-center justify-center`}
           >
             {currentlyPage == data ? (
               <p>
@@ -258,8 +302,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
 
   return (
     <div>
-      <h2 className="mt-4">固定値</h2>
-      <p className="mt-4 ml-4">
+      <p className="ml-4 mt-4">
         記事数：
         <input
           type="number"
@@ -272,7 +315,21 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
           }}
         />
       </p>
-      <p className="mt-2 ml-4">
+      <p className="ml-4 mt-2">
+        1ページあたりの記事の個数：
+        <input
+          type="number"
+          value={itemsPerPage}
+          min={1}
+          name="itemsPerPage"
+          aria-label="1ページあたりの記事の個数を入力してください"
+          className="ml-2 border border-black"
+          onChange={(e) => {
+            setItemsPerpage(Number(e.target.value));
+          }}
+        />
+      </p>
+      <p className="my-4 ml-4">
         現在のページ：
         <input
           type="number"
@@ -287,22 +344,7 @@ const Pagenation = ({ article, page }: { article: Article; page: number }) => {
           }}
         />
       </p>
-      <h2 className="mt-4">可変値</h2>
-      <p className="my-4 ml-4">
-        1ページあたりの記事の個数：
-        <input
-          type="number"
-          value={itemsPerPage}
-          min={1}
-          name="itemsPerPage"
-          aria-label="1ページあたりの記事の個数を入力してください"
-          className="ml-2 border border-black"
-          onChange={(e) => {
-            setItemsPerpage(Number(e.target.value));
-          }}
-        />
-      </p>
-      <div className="flex justify-center items-center gap-2">
+      <div className="flex items-center justify-center gap-2">
         {GeneratePageLinks()}
       </div>
     </div>

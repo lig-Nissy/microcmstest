@@ -1,13 +1,12 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:tailwindcss/recommended",
     "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "tailwindcss", "json"],
+  "plugins": ["@typescript-eslint", "json"],
   "rules": {
     "no-console": "error",
     "@next/next/no-img-element": "off", // Next.jsで<img>要素を使用しても警告を出さないようにする

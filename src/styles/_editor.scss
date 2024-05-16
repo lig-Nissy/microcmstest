@@ -14,16 +14,26 @@
   ul {
     margin: 0 0 2.03rem 0;
   }
+  ul > li {
+    margin: 0 0 0 5%;
+    list-style: disc;
+  }
+  h1 {
+    margin: 0 0 2.03rem 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
   h2 {
     margin: 0 0 2.03rem 0;
+    font-size: 2rem;
     font-weight: 700;
-    text-align: center;
   }
   h3 {
     margin: 0 0 2.03rem 0;
+    font-size: 1.5rem;
   }
   ol > li {
-    list-style: auto;
     margin: 0 0 0 5%;
+    list-style: auto;
   }
 }

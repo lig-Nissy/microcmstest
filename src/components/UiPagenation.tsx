@@ -1,6 +1,3 @@
-//React hooks
-import { useState } from 'react';
-
 // ARTICL INDEX PAGE
 import Link from 'next/link';
 
@@ -18,21 +15,10 @@ const Pagenation = ({
   page: number;
 }) => {
   //1ページあたりに描画する記事の個数の制限
-  // const { totalCount } = article;
-  const [totalCount, setTotalCount] = useState(
-    article.totalCount,
-  );
-
-  // const itemsPerPage = Variables.PAGES_PAR_VIEW; //1ページあたりの表示数
-  const [itemsPerPage, setItemsPerpage] = useState(
-    Variables.PAGES_PAR_VIEW,
-  ); //1ページあたりの表示数
-
+  const { totalCount } = article;
+  const itemsPerPage = Variables.PAGES_PAR_VIEW; //1ページあたりの表示数
   const pageNumber = Math.ceil(totalCount / itemsPerPage);
-  // const currentlyPage = page; //現在のページ
-  // const [pageNumber, setPageNumber] = useState(Math.ceil(totalCount / itemsPerPage));
-
-  const [currentlyPage, setCurrentlyPage] = useState(page);
+  const currentlyPage = page; //現在のページ
   const showPagenation = 4; //ページネーションの表示数
   const pages: number[] = []; //ページネーション生成用の配列
 
@@ -302,48 +288,6 @@ const Pagenation = ({
 
   return (
     <div>
-      <p className="ml-4 mt-4">
-        記事数：
-        <input
-          type="number"
-          value={totalCount}
-          name="totalCount"
-          aria-label="記事数を入力してください"
-          className="ml-2 border border-black"
-          onChange={(e) => {
-            setTotalCount(Number(e.target.value));
-          }}
-        />
-      </p>
-      <p className="ml-4 mt-2">
-        1ページあたりの記事の個数：
-        <input
-          type="number"
-          value={itemsPerPage}
-          min={1}
-          name="itemsPerPage"
-          aria-label="1ページあたりの記事の個数を入力してください"
-          className="ml-2 border border-black"
-          onChange={(e) => {
-            setItemsPerpage(Number(e.target.value));
-          }}
-        />
-      </p>
-      <p className="my-4 ml-4">
-        現在のページ：
-        <input
-          type="number"
-          value={currentlyPage}
-          max={pageNumber}
-          min={1}
-          name="currentlyPage"
-          aria-label="現在のページを入力してください"
-          className="ml-2 border border-black"
-          onChange={(e) => {
-            setCurrentlyPage(Number(e.target.value));
-          }}
-        />
-      </p>
       <div className="flex items-center justify-center gap-2">
         {GeneratePageLinks()}
       </div>

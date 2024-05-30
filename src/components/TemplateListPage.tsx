@@ -23,14 +23,6 @@ const Listpage = ({
   page: number;
 }) => {
   const baselink = '/blog/article';
-  // const pagefind = await import('/pagefind/pagefind.js');
-  // const search = await pagefind.search('static');
-  // const oneResult = await search.results[0].data();
-  // console.log(oneResult);
-  // await pagefind.options({
-  //   bundlePath: '/custom-pagefind-directory/',
-  // });
-  // pagefind.init();
 
   return (
     <>
@@ -44,9 +36,6 @@ const Listpage = ({
             __html: `${blog.contents[0].body}`,
           }}
         />
-        <div className="w-4/5 bg-white mx-auto">
-          <SearchPage />
-        </div>
         <div className="flex flex-row-reverse w-4/5 mx-auto overflow-scroll ">
           <div className="w-1/5 bg-slate-400">
             <Sidebar />
@@ -55,7 +44,10 @@ const Listpage = ({
             <div>
               <h2 className="text-center mb-7">日報</h2>
               <div className="w-4/5 mx-auto">
-                <div className="editer">
+                <div className=" bg-white">
+                  <SearchPage />
+                </div>
+                <div className="editer my-8">
                   {article.contents.map(
                     (content, index) => {
                       return (

@@ -12,6 +12,7 @@ import { Article, ArticleTitle } from '@/api/types';
 
 //components
 import { TemplatesArticle } from '@/components/TemplateArticle';
+import { title } from 'process';
 
 //////////////////////////
 // 詳細ページのパスを生成
@@ -43,6 +44,7 @@ export const getStaticProps = async (
   return {
     props: {
       article,
+      title,
     },
   };
 };
@@ -52,5 +54,7 @@ export default function Home({
 }: {
   article: Article;
 }) {
-  return <TemplatesArticle article={article} />;
+  return (
+    <TemplatesArticle article={article} title={title} />
+  );
 }

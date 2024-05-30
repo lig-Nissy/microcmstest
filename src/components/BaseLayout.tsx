@@ -1,8 +1,8 @@
 // BASE LAYOUT COMPONENT
-import React from "react";
-import { BaseHead } from "@/components/BaseHead";
-import { BaseHeader } from "@/components/BaseHeader";
-import { BaseFooter } from "@/components/BaseFooter";
+import React from 'react';
+import { BaseHead } from '@/components/BaseHead';
+import { BaseHeader } from '@/components/BaseHeader';
+import { BaseFooter } from '@/components/BaseFooter';
 
 export const BaseLayout = ({
   children,

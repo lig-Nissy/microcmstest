@@ -11,7 +11,7 @@ import styles from '@/styles/components/templateListpage.module.scss';
 import BaseLayout from './BaseLayout';
 import Sidebar from '@/components/BaseSidebar';
 import Pagenation from '@/components/UiPagenation';
-import SearchPage from './UiPageFind';
+// import SearchPage from '@/components/UiPageFind';
 
 const Listpage = ({
   blog,
@@ -45,7 +45,7 @@ const Listpage = ({
               <h2 className="text-center mb-7">日報</h2>
               <div className="w-4/5 mx-auto">
                 <div className=" bg-white">
-                  <SearchPage />
+                  {/* <SearchPage /> */}
                 </div>
                 <div className="editer my-8">
                   {article.contents.map(

@@ -1,48 +1,77 @@
-import React, { useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
+// import Link from 'next/link';
 
-declare global {
-  interface Window {
-    PagefindUI: any;
-  }
-}
+// export default function SearchPage() {
+//   const [query, setQuery] = useState('');
+//   const [results, setResults] = useState([]);
 
-export default function SearchPage() {
-  useEffect(() => {
-    let pagefindInstance: any;
+//   useEffect(() => {
+//     async function loadPagefind() {
+//       if (typeof window.pagefind === 'undefined') {
+//         try {
+//           window.pagefind = await import(
+//             // Use a dynamic import with a relative path to ensure it's loaded correctly
+//             /* webpackIgnore: true */
+//             './pagefind/pagefind.js'
+//           );
+//           await index.addCustomRecord({
+//             url: '/resume.pdf',
+//             content:
+//               'Aenean lacinia bibendum nulla sed consectetur',
+//             language: 'ja',
+//           });
+//         } catch (e) {
+//           window.pagefind = {
+//             search: () => ({ results: [] }),
+//           };
+//         }
+//       }
+//     }
+//     loadPagefind();
+//   }, []);
 
-    async function loadPagefind() {
-      if (
-        typeof window !== 'undefined' &&
-        typeof window.PagefindUI === 'undefined'
-      ) {
-        try {
-          await import(
-            // @ts-expect-error pagefind.js generated after build
-            /* webpackIgnore: true */ '/pagefind/pagefind.js'
-          );
-        } catch (e) {
-          //error handling
-        }
-      }
+//   async function handleSearch() {
+//     if (window.pagefind) {
+//       const search = await window.pagefind.search(query);
+//       setResults(search.results);
+//     }
+//   }
 
-      if (typeof window.PagefindUI !== 'undefined') {
-        pagefindInstance = new window.PagefindUI({
-          element: '#search',
-          showSubResults: true,
-          baseUrl: '/',
-          url: '/blog/article/',
-        });
-      }
-    }
+//   return (
+//     <div>
+//       <input
+//         type="text"
+//         placeholder="Search..."
+//         value={query}
+//         onChange={(e) => setQuery(e.target.value)}
+//         onInput={handleSearch}
+//       />
+//       <div id="results">
+//         {results.map((result, index) => (
+//           <Result key={result.id} result={result} />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
 
-    loadPagefind();
+// function Result({ result }) {
+//   const [data, setData] = useState(null);
 
-    return () => {
-      if (pagefindInstance) {
-        pagefindInstance.destroy();
-      }
-    };
-  }, []);
+//   useEffect(() => {
+//     async function fetchData() {
+//       const data = await result.data();
+//       setData(data);
+//     }
+//     fetchData();
+//   }, [result]);
 
-  return <div id="search"></div>;
-}
+//   if (!data) return null;
+
+//   return (
+//     <Link href={data.url}>
+//       <h3>{data.meta.title}</h3>
+//       <p>{data.excerpt}</p>
+//     </Link>
+//   );
+// }

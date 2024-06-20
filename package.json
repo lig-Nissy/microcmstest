@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && pagefind --site .next --output-path public/pagefind",
+    "build": "next build && pagefind --site .next --output-path .next/src/pages/pagefind",
     "start": "next start",
     "lint:html": "markuplint 'src/**/*.{html,jsx,tsx}'",
     "lint:style": "stylelint 'src/**/*.{css,scss}'",

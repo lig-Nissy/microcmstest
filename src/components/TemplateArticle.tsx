@@ -17,6 +17,7 @@ export const TemplatesArticle = ({
         <div
           className=" bg-slate-200 pt-16 pb-8"
           data-pagefind-body
+          data-pagefind-sort={`date[${article.contents[0].title}]`}
         >
           <div className="flex flex-row-reverse gap-12 w-4/5 mx-auto">
             <div className="w-1/5 bg-slate-400">

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && pagefind --site .next --output-path .next/src/pages/pagefind",
+    "build": "next build && pagefind --site out --output-path 'public/pagefind/'",
     "start": "next start",
     "lint:html": "markuplint 'src/**/*.{html,jsx,tsx}'",
     "lint:style": "stylelint 'src/**/*.{css,scss}'",
@@ -21,7 +21,8 @@
     "react": "^18",
     "react-dom": "^18",
     "sass": "^1.74.1",
-    "stylelint-config-recess-order": "^5.0.1"
+    "stylelint-config-recess-order": "^5.0.1",
+    "use-debounce": "^10.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.1.1",

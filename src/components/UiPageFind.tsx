@@ -1,77 +1,89 @@
-// import React, { useState, useEffect } from 'react';
-// import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 
-// export default function SearchPage() {
-//   const [query, setQuery] = useState('');
-//   const [results, setResults] = useState([]);
+import styles from '@/styles/components/uiPagefind.module.scss';
 
-//   useEffect(() => {
-//     async function loadPagefind() {
-//       if (typeof window.pagefind === 'undefined') {
-//         try {
-//           window.pagefind = await import(
-//             // Use a dynamic import with a relative path to ensure it's loaded correctly
-//             /* webpackIgnore: true */
-//             './pagefind/pagefind.js'
-//           );
-//           await index.addCustomRecord({
-//             url: '/resume.pdf',
-//             content:
-//               'Aenean lacinia bibendum nulla sed consectetur',
-//             language: 'ja',
-//           });
-//         } catch (e) {
-//           window.pagefind = {
-//             search: () => ({ results: [] }),
-//           };
-//         }
-//       }
-//     }
-//     loadPagefind();
-//   }, []);
+export default function SearchPage() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
 
-//   async function handleSearch() {
-//     if (window.pagefind) {
-//       const search = await window.pagefind.search(query);
-//       setResults(search.results);
-//     }
-//   }
+  useEffect(() => {
+    const loadPagefind = async () => {
+      if (typeof (window as any).pagefind === 'undefined') {
+        try {
+          (window as any).pagefind = await import(
+            // @ts-expect-error pagefind.js generated after build
+            /* webpackIgnore: true */ '/pagefind/pagefind.js'
+          );
+        } catch (e) {
+          (window as any).pagefind = {
+            search: () => ({ results: [] }),
+          };
+        }
+      }
+    };
+    loadPagefind();
+  }, []);
 
-//   return (
-//     <div>
-//       <input
-//         type="text"
-//         placeholder="Search..."
-//         value={query}
-//         onChange={(e) => setQuery(e.target.value)}
-//         onInput={handleSearch}
-//       />
-//       <div id="results">
-//         {results.map((result, index) => (
-//           <Result key={result.id} result={result} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
+  async function handleSearch() {
+    if ((window as any).pagefind) {
+      const search = await (window as any).pagefind.search(
+        query,
+      );
+      setResults(search.results);
+    }
+  }
 
-// function Result({ result }) {
-//   const [data, setData] = useState(null);
+  useEffect(() => {
+    handleSearch();
+  }, [query]);
 
-//   useEffect(() => {
-//     async function fetchData() {
-//       const data = await result.data();
-//       setData(data);
-//     }
-//     fetchData();
-//   }, [result]);
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className={styles.search}
+      />
+      <div id="results" className={styles.result}>
+        {results.length > 0 && (
+          <h2 className={styles.subHeading}>検索結果...</h2>
+        )}
+        {results.map((result: any) => (
+          <Result key={result.id} result={result} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
-//   if (!data) return null;
+function Result({ result }: { result: any }) {
+  const [data, setData] = useState<any>(null);
 
-//   return (
-//     <Link href={data.url}>
-//       <h3>{data.meta.title}</h3>
-//       <p>{data.excerpt}</p>
-//     </Link>
-//   );
-// }
+  useEffect(() => {
+    async function fetchData() {
+      const data = await result.data();
+      setData(data);
+    }
+    fetchData();
+  }, [result]);
+
+  if (!data) return null;
+
+  const parts = data.url.split('/');
+
+  const articleId = parts[parts.length - 2];
+
+  return (
+    <div className={styles.container}>
+      <Link href={data.url}>
+        <h3>{articleId}</h3>
+        <p
+          dangerouslySetInnerHTML={{ __html: data.excerpt }}
+        />
+      </Link>
+    </div>
+  );
+}

@@ -2,7 +2,7 @@
 import Link from 'next/link';
 
 //api types
-import { Blog, Article } from '@/api/types';
+import { Article } from '@/api/types';
 
 // Style
 import styles from '@/styles/components/templateListpage.module.scss';
@@ -11,14 +11,12 @@ import styles from '@/styles/components/templateListpage.module.scss';
 import BaseLayout from './BaseLayout';
 import Sidebar from '@/components/BaseSidebar';
 import Pagenation from '@/components/UiPagenation';
-// import SearchPage from '@/components/UiPageFind';
+import SearchPage from '@/components/UiPageFind';
 
 const Listpage = ({
-  blog,
   article,
   page,
 }: {
-  blog: Blog;
   article: Article;
   page: number;
 }) => {
@@ -27,25 +25,19 @@ const Listpage = ({
   return (
     <>
       <BaseLayout>
-        <h1 className="bg-[#cecece] text-center">
-          {blog.contents[0].title}
-        </h1>
-        <div
-          className={styles.flexbox}
-          dangerouslySetInnerHTML={{
-            __html: `${blog.contents[0].body}`,
-          }}
-        />
+        <h1 className="bg-[#cecece] text-center">ブログ</h1>
         <div className="flex flex-row-reverse w-4/5 mx-auto overflow-scroll ">
           <div className="w-1/5 bg-slate-400">
             <Sidebar />
           </div>
           <div className="w-4/5">
             <div>
-              <h2 className="text-center mb-7">日報</h2>
+              <h2 className="text-center mt-8 mb-2">
+                日報
+              </h2>
               <div className="w-4/5 mx-auto">
                 <div className=" bg-white">
-                  {/* <SearchPage /> */}
+                  <SearchPage />
                 </div>
                 <div className="editer my-8">
                   {article.contents.map(

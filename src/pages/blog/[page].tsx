@@ -5,10 +5,10 @@ import {
 } from 'next';
 
 // apis
-import { getBlog, getArticle } from '@/api/microcms';
+import { getArticle } from '@/api/microcms';
 
 //api types
-import { Blog, Article } from '@/api/types';
+import { Article } from '@/api/types';
 
 //compornents
 import Listpage from '@/components/TemplateListPage';
@@ -41,7 +41,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps = async (
   context: GetStaticPropsContext,
 ) => {
-  const blog = await getBlog();
   const itemsPerPage = Variables.PAGES_PAR_VIEW; //1ページあたりの表示数
   //paseIntで文字列型を数値型に変換
   const page = parseInt(context.params?.page as string, 10); // 現在のページ番号
@@ -56,7 +55,6 @@ export const getStaticProps = async (
 
   return {
     props: {
-      blog,
       article,
       page,
     },
@@ -64,17 +62,13 @@ export const getStaticProps = async (
 };
 
 const page = ({
-  blog,
   article,
   page,
 }: {
-  blog: Blog;
   article: Article;
   page: number;
 }) => {
-  return (
-    <Listpage blog={blog} article={article} page={page} />
-  );
+  return <Listpage article={article} page={page} />;
 };
 
 export default page;
